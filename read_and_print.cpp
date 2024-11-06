@@ -13,11 +13,11 @@ Aim: To read the input file from path: E:\Cpp_text\GraphTheory\dothi.txt
 */
 
 struct GRAPH{
-	int deg;
-	int matrix[MAX][MAX];
+	int degree; //Number of the graph's degree
+	int matrix[MAX][MAX]; //Adjacency matrix
 };
 
-void readGraphFromPath(){
+void readGraphFromPath(GRAPH& g){
 	//define in file
 	ifstream fileIn;
 	
@@ -30,8 +30,13 @@ with a single forward slash (/) because \ is treated as an escape character in C
 	
 	//working with in file
 	if ( fileIn.is_open() ){
-		cout << "File is being opened";
+		fileIn >> g.degree;
 		
+		for (int i= 0; i < g.degree; i++){
+			for (int j= 0; j < g.degree; j++){
+				fileIn >> g.matrix[i][j];
+			}
+		}
 		
 		//close after working
 		fileIn.close();
@@ -42,12 +47,24 @@ with a single forward slash (/) because \ is treated as an escape character in C
 	}
 }
 
+void printGraph(GRAPH g){
+	cout << "So dinh la: " << g.degree << "\nMa tran ke:\n";
+	
+	for (int i= 0; i < g.degree; i++){
+		for (int j= 0; j < g.degree; j++){
+			cout <<  g.matrix[i][j] << " ";
+		}
+		cout << "\n";
+	}
+}
 
 int main() {
 	
-	readGraphFromPath();
+	GRAPH graph;
 	
-	//printGraph();
+	readGraphFromPath(graph);
+	
+	printGraph(graph);
 	
 	return 0;
 }

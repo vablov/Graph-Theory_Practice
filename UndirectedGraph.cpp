@@ -11,7 +11,7 @@ struct Graph{
 
 /*
 Viet chuong trinh doc ma tran ke cua do thi. Xac dinh va in ra:
-	a. DONE: So canh (edges), so dinh (vertices) cua do thi?
+	a. TODO: So canh (edges), so dinh (vertices) cua do thi?
 	
 		DESAU: Phan biet 2 TH do thi co huong va do thi vo huong
 		
@@ -48,35 +48,59 @@ void readGraph(Graph& g){
 	}
 }
 
-void displayEV(Graph g){
+void displayNumVnE(Graph g){
+	int edgeNum = 0;
 	cout << "Do thi co so dinh la: " << g.ver << "\n";
-	cout << "Do thi co so canh:\n";
+	cout << "Do thi co so canh: ";
 	for (int i= 0; i<g.ver; i++){
 		for (int j=0; j<g.ver; j++){
-			cout << g.adj[i][j] << " ";
+			if ( g.adj[i][j] != 0 || g.adj[i][j] != 0 ){
+				edgeNum += 1;
+			}
 		}
-		cout << "\n";
 	}
+	cout << edgeNum << "\n";
 }
 
 void displayDeg(Graph g){
 	//TODO
 }
 
+bool undirectedGraph(Graph g){
+	for (int i= 0; i < g.ver; i++){
+		for (int j= 0; j < g.ver; j++){
+			if ( g.adj[i][j] != g.adj[j][i] ) return 0;
+		}
+	}
+	return 1;
+}
+/*
+void displaySpecialVertices(Graph g){
+	for (int i= 0; i < g.ver; i++){
+			for (int j= 0; j < g.ver; j++){
+				if ( (g.adj[i][j] == 0) && (g.adj[j][i]==0) ){
+					cout << "Dinh co lap:\n"
+					cout << g.adj[i] << " ";
+				}
+				cout << "\n"
+				if ( (g.adj[i][j] == 1) && (g.adj[j][i]==1) ){
+					cout << "Dinh treo:\n"
+					cout << g.adj[i] << " ";
+				}
+				cout << "\n";
+			}
+		}
+	}
+}
+*/
 int main(){
 	Graph g;
 	
 	readGraph(g);
-	
-//	if (!maTranKeHopLe(g)){
-//		cout << "Ma tran ke khong hop le";
-//		exit(0);
-//	}
-//	else{
-//		//Lam bai
-//	}
 
-	displayEV(g);
+	displayNumVnE(g);
+
+	
 	
 	return 0;
 }
